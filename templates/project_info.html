@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №8</title>
+    <style>
+        .group {
+            font-style: italic;
+            color: blue;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ project_name }}</h1>
+    <p><strong>Студент:</strong> {{ Коноваленко Денис Юрійович }}</p>
+    <p class="group"><strong>Група:</strong> {{ КБ21015Б }}</p>
+
+    <h2>Таблиця Клієнти</h2>
+    <table>
+        <tr>
+            <th>Код клієнта</th>
+            <th>Назва фірми</th>
+            <th>Юридична/Фізична</th>
+            <th>Адреса</th>
+            <th>Телефон</th>
+            <th>Контактна особа</th>
+            <th>Розрахунковий рахунок</th>
+        </tr>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client.client_code }}</td>
+            <td>{{ client.firm_name }}</td>
+            <td>{{ client.entity_type }}</td>
+            <td>{{ client.address }}</td>
+            <td>{{ client.phone }}</td>
+            <td>{{ client.contact_person }}</td>
+            <td>{{ client.account_number }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Таблиця Товари</h2>
+    <table>
+        <tr>
+            <th>Код товару</th>
+            <th>Назва товару</th>
+            <th>Ціна</th>
+            <th>Кількість</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.product_code }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.stock_quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Таблиця Продаж товарів</h2>
+    <table>
+        <tr>
+            <th>Код продажу</th>
+            <th>Дата продажу</th>
+            <th>Клієнт</th>
+            <th>Товар</th>
+            <th>Кількість</th>
+            <th>Знижка</th>
+            <th>Форма оплати</th>
+            <th>Доставка</th>
+            <th>Вартість доставки</th>
+        </tr>
+        {% for sale in sales %}
+        <tr>
+            <td>{{ sale.sale_code }}</td>
+            <td>{{ sale.sale_date }}</td>
+            <td>{{ sale.client.firm_name }}</td>
+            <td>{{ sale.product.name }}</td>
+            <td>{{ sale.quantity }}</td>
+            <td>{{ sale.discount }}</td>
+            <td>{{ sale.payment_method }}</td>
+            <td>{{ sale.delivery_needed }}</td>
+            <td>{{ sale.delivery_cost }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
